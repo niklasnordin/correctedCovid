@@ -36,7 +36,7 @@ for i,d in enumerate(c):
         pos_rate.append(data[pr][i])
         tests.append(data[nt][i])
 
-def_test=100000.0/7.0
+def_test=1000000.0/7.0
 for i,d in enumerate(pos_rate):
     normalized_cases.append(def_test*d)
 
@@ -55,8 +55,8 @@ plt.plot(date,dco, color='blue')
 plt.plot(date,dcn, color='red')
 
 plt.bar(date,cases, width=1, alpha=0.5, color='blue', label="cases")
-plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 100 000 tests")
-plt.bar(free_test_date,free_test_case, width=1, alpha=0.5, color="green", label="Start of free testing")
+plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 1 000 000 tests")
+#plt.bar(free_test_date,free_test_case, width=1, alpha=0.5, color="green", label="Start of free testing")
 
 xt = ax.get_xticks()
 ax.set_xticks(np.arange(xt[0],xt[np.size(xt)-1], 30))
@@ -64,8 +64,8 @@ plt.legend()
 plt.grid()
 plt.xlabel("Date")
 plt.ylabel("number of positive tests")
-plt.title("Number of positive corona tests in Sweden")
-plt.savefig("cases.png")
+plt.title("Number of positive corona tests in Belgium")
+plt.savefig("cases_owid_swe.png")
 plt.show()
 
 #print(tests)
