@@ -15,6 +15,12 @@ days2=14
 country="SWE"
 c = data["iso_code"]
 
+codes = { "SWE" : "Sweden",
+          "USA" : "USA",
+          "BEL" : "Belgium",
+          "ITA" : "Italy"
+}
+
 nc="new_cases"
 nd="new_deaths"
 da="date"
@@ -36,7 +42,7 @@ for i,d in enumerate(c):
         pos_rate.append(data[pr][i])
         tests.append(data[nt][i])
 
-def_test=1000000.0/7.0
+def_test=100000.0/7.0
 for i,d in enumerate(pos_rate):
     normalized_cases.append(def_test*d)
 
@@ -64,8 +70,8 @@ plt.legend()
 plt.grid()
 plt.xlabel("Date")
 plt.ylabel("number of positive tests")
-plt.title("Number of positive corona tests in Belgium")
-plt.savefig("cases_owid_swe.png")
+plt.title("Number of positive corona tests in {}".format(codes[country]))
+plt.savefig("cases_owid_{}.png".format(country))
 plt.show()
 
 #print(tests)

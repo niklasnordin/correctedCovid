@@ -46,12 +46,12 @@ for i,d in enumerate(cases):
     ds = (dx).split('-')
     week = float(datetime.date(int(ds[0]),int(ds[1]),int(ds[2])).isocalendar()[1])
     wi = w[week]
-    factor = 100000.0/wi
+    factor = 200000.0/wi
     factor = min(15.0, factor)
     normalized_cases.append(d*factor)
 
 free_test_date = [ "2020-06-04" ]
-free_test_case = [ 4000.0 ]
+free_test_case = [ 7000.0 ]
 
 fig, ax = plt.subplots(figsize=(15,6))
 
@@ -64,8 +64,8 @@ plt.plot(date,dco, color='blue')
 plt.plot(date,dcn, color='red')
 
 plt.bar(date,cases, width=1, alpha=0.5, color='blue', label="cases")
-plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 100 000 tests")
-plt.bar(free_test_date,free_test_case, width=1, alpha=0.5, color="green", label="Start of free testing")
+plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 200 000 tests")
+plt.bar(free_test_date,free_test_case, width=1, alpha=0.8, color="green", label="Start of free testing")
 
 xt = ax.get_xticks()
 ax.set_xticks(np.arange(xt[0],xt[np.size(xt)-1], 30))

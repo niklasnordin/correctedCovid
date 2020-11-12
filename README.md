@@ -6,6 +6,7 @@ https://covid19.who.int/table
 
 weekly number of tests
 https://www.statista.com/statistics/1133055/weekly-number-of-coronavirus-tests-in-sweden/
+https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/statistik-och-analyser/antalet-testade-for-covid-19/
 
 to plot this data run:
 python plt_curve.py
