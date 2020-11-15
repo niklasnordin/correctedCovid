@@ -26,6 +26,7 @@ nd="new_deaths"
 da="date"
 pr="positive_rate"
 nt='new_tests'
+rr='reproduction_rate'
 
 cases=[]
 deaths=[]
@@ -33,6 +34,7 @@ date=[]
 pos_rate=[]
 normalized_cases=[]
 tests=[]
+repro=[]
 
 for i,d in enumerate(c):
     if d==country:
@@ -41,8 +43,9 @@ for i,d in enumerate(c):
         date.append(data[da][i])
         pos_rate.append(data[pr][i])
         tests.append(data[nt][i])
-
-def_test=100000.0/7.0
+        repro.append(data[rr][i])
+        
+def_test=1000000.0
 for i,d in enumerate(pos_rate):
     normalized_cases.append(def_test*d)
 
@@ -57,12 +60,15 @@ dco2=np.convolve(cases, np.ones(days2)/days2, mode='same')
 dcn=np.convolve(normalized_cases, np.ones(days)/days, mode='same')
 dcn2=np.convolve(normalized_cases, np.ones(days2)/days2, mode='same')
 
-plt.plot(date,dco, color='blue')
-plt.plot(date,dcn, color='red')
+#plt.plot(date,dco, color='blue')
+#plt.plot(date,dcn, color='red')
+plt.plot(date,repro, alpha=0.5, color='green')
 
-plt.bar(date,cases, width=1, alpha=0.5, color='blue', label="cases")
-plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 1 000 000 tests")
+#plt.bar(date,cases, width=1, alpha=0.5, color='blue', label="cases")
+#plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 1 000 000 tests")
 #plt.bar(free_test_date,free_test_case, width=1, alpha=0.5, color="green", label="Start of free testing")
+#plt.bar(date,repro, width=0.9, alpha=0.5, color='green', label="tests")
+
 
 xt = ax.get_xticks()
 ax.set_xticks(np.arange(xt[0],xt[np.size(xt)-1], 30))

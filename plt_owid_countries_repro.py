@@ -10,10 +10,11 @@ from scipy.optimize import minimize
 filename="owid-covid-data.csv"
 data = pd.read_csv(filename, sep=",")
 
-days=7
+days=5
 days2=14
 #country= [ "SWE", "USA", "ITA", "BEL", "ESP", "POL", "GBR" ]
-country= [ "SWE", "DNK", "NOR", "FIN" ]
+#country= [ "SWE", "DNK", "NOR", "FIN" ]
+country = [ "SWE", "USA", "CAN" ]
 c = data["iso_code"]
 
 nc="new_cases"
@@ -21,6 +22,7 @@ nd="new_deaths"
 da="date"
 pr="positive_rate"
 nt='new_tests'
+rr='reproduction_rate'
 
 cases=[]
 deaths=[]
@@ -30,14 +32,22 @@ psr = []
 normalized_cases=[]
 tests=[]
 all_dates=[]
+repro=[]
+
 for cnt in country:
     pos_rate= []
     date = []
+    repi = []
+    tt = []
     for i,d in enumerate(c):
         if d==cnt:
             pos_rate.append(data[pr][i])
+            repi.append(data[rr][i])
             date.append(data[da][i])
+            tt.append(data[nt][i])
+    tests.append(tt)
     psr.append(pos_rate)
+    repro.append(repi)
     all_dates.append(date)    
 
 ncall = []
@@ -50,24 +60,19 @@ for p in psr:
 
 fig, ax = plt.subplots(figsize=(15,6))
 
-
 for i,p in enumerate(ncall):
-    print(i)
-    dcn=np.convolve(p, np.ones(days)/days, mode='same')
-    plt.plot(all_dates[i],dcn, label=country[i])
-
-#plt.bar(date,cases, width=1, alpha=0.5, color='blue', label="cases")
-#plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 1 000 000 tests")
-#plt.bar(free_test_date,free_test_case, width=1, alpha=0.5, color="green", label="Start of free testing")
+    dcn=np.convolve(repro[i], np.ones(days)/days, mode='same')
+    #plt.plot(all_dates[i],dcn, label=country[i])
+    #plt.plot(all_dates[i], repro[i], label=country[i])
+    plt.plot(all_dates[i], dcn, label=country[i])
 
 xt = ax.get_xticks()
 ax.set_xticks(np.arange(xt[0],xt[np.size(xt)-1], 30))
 plt.legend()
 plt.grid()
 plt.xlabel("Date")
-plt.ylabel("number of positive tests")
-plt.title("Number of positive corona tests scaled to 1 000 000 tests")
+plt.ylabel("Reproduction Rate")
+plt.title("Real Time Estimation of the R value")
 plt.savefig("cases_owid_cntr.png")
 plt.show()
 
-#print(tests)
