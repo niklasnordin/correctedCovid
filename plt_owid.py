@@ -12,6 +12,7 @@ data = pd.read_csv(filename, sep=",")
 
 days=7
 days2=14
+back_days=14
 country="SWE"
 c = data["iso_code"]
 
@@ -45,7 +46,9 @@ for i,d in enumerate(c):
         tests.append(data[nt][i])
         repro.append(data[rr][i])
         
-def_test=1000000.0
+#def_test=100000.0/7.0
+def_test=tests[np.size(tests)-back_days]
+print(tests)
 for i,d in enumerate(pos_rate):
     normalized_cases.append(def_test*d)
 
@@ -56,16 +59,16 @@ free_test_case = [ 4000.0 ]
 fig, ax = plt.subplots(figsize=(15,6))
 
 dco=np.convolve(cases, np.ones(days)/days, mode='same')
-dco2=np.convolve(cases, np.ones(days2)/days2, mode='same')
+#dco2=np.convolve(cases, np.ones(days2)/days2, mode='same')
 dcn=np.convolve(normalized_cases, np.ones(days)/days, mode='same')
-dcn2=np.convolve(normalized_cases, np.ones(days2)/days2, mode='same')
+#dcn2=np.convolve(normalized_cases, np.ones(days2)/days2, mode='same')
 
-#plt.plot(date,dco, color='blue')
-#plt.plot(date,dcn, color='red')
-plt.plot(date,repro, alpha=0.5, color='green')
+plt.plot(date,dco, color='blue')
+plt.plot(date,dcn, color='red')
+#plt.plot(date,repro, alpha=0.5, color='green')
 
-#plt.bar(date,cases, width=1, alpha=0.5, color='blue', label="cases")
-#plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 1 000 000 tests")
+plt.bar(date,cases, width=1, alpha=0.5, color='blue', label="cases")
+plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for {} tests/week".format(int(7*def_test)))
 #plt.bar(free_test_date,free_test_case, width=1, alpha=0.5, color="green", label="Start of free testing")
 #plt.bar(date,repro, width=0.9, alpha=0.5, color='green', label="tests")
 

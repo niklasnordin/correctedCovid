@@ -14,7 +14,7 @@ days=5
 days2=14
 #country= [ "SWE", "USA", "ITA", "BEL", "ESP", "POL", "GBR" ]
 #country= [ "SWE", "DNK", "NOR", "FIN" ]
-country = [ "SWE", "USA", "CAN" ]
+country = [ "SWE", "USA", "ITA" ]
 c = data["iso_code"]
 
 nc="new_cases"

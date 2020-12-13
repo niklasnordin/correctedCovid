@@ -12,7 +12,8 @@ from scipy.optimize import minimize
 # sick people is a percentage of total people
 #
 
-filename="WHO-COVID-19-global-data.csv"
+#filename="WHO-COVID-19-global-data.csv"
+filename="owid-covid-data.csv"
 data = pd.read_csv(filename, sep=",")
 weight = pd.read_csv("weekly_test_sweden.dat", sep=" ")
 
@@ -20,11 +21,11 @@ w = weight["tests"]
 
 country="Sweden"
 #country="United States of America"
-nc=" New_cases"
-nd=" New_deaths"
-da="Date_reported"
+nc="new_cases"
+nd="new_deaths"
+da="date"
 
-c = data[" Country"]
+c = data["location"]
 
 days=7
 days2=14
@@ -46,7 +47,7 @@ for i,d in enumerate(cases):
     ds = (dx).split('-')
     week = float(datetime.date(int(ds[0]),int(ds[1]),int(ds[2])).isocalendar()[1])
     wi = w[week]
-    factor = 100000.0/wi
+    factor = 200000.0/wi
     factor = min(15.0, factor)
     normalized_cases.append(d*factor)
 
@@ -64,11 +65,13 @@ plt.plot(date,dco, color='blue')
 plt.plot(date,dcn, color='red')
 
 plt.bar(date,cases, width=1, alpha=0.5, color='blue', label="cases")
-plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 100 000 tests")
+plt.bar(date,normalized_cases, width=0.5, alpha=0.5, color='red', label="Normalized for 200 000 tests")
 plt.bar(free_test_date,free_test_case, width=1, alpha=0.8, color="green", label="Start of free testing")
 
 xt = ax.get_xticks()
+
 ax.set_xticks(np.arange(xt[0],xt[np.size(xt)-1], 30))
+plt.ylim(0,7500)
 plt.legend()
 plt.grid()
 plt.xlabel("Date")

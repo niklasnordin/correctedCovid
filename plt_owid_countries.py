@@ -12,8 +12,8 @@ data = pd.read_csv(filename, sep=",")
 
 days=7
 days2=14
-#country= [ "SWE", "USA", "ITA", "BEL", "ESP", "POL", "GBR" ]
-country= [ "SWE", "DNK", "NOR", "FIN" ]
+country= [ "SWE", "USA", "ITA", "BEL", "ESP", "POL", "GBR" ]
+#country= [ "SWE", "DNK", "NOR", "FIN" ]
 c = data["iso_code"]
 
 nc="new_cases"
