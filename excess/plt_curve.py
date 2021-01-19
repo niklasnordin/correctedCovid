@@ -9,7 +9,12 @@ import numpy as np
 from scipy.optimize import minimize
 
 country="Sweden"
-country="United States"
+#country="United States"
+country="Italy"
+country="Spain"
+country="Portugal"
+country="Belgium"
+country="Netherlands"
 
 av1519 = "average_deaths_2015_2019_all_ages"
 d15 = "deaths_2015_all_ages"
