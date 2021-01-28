@@ -8,13 +8,28 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import minimize
 
-country="Sweden"
-#country="United States"
-country="Italy"
-country="Spain"
-country="Portugal"
-country="Belgium"
-country="Netherlands"
+#country="Sweden"
+country="United States"
+#country="Italy"
+#country="Spain"
+#country="Portugal"
+#country="Belgium"
+#country="Netherlands"
+#country="Norway"
+#country="United Kingdom"
+#country="Denmark"
+#country="Iceland"
+
+reported = {}
+reported["Belgium"] = 19441
+reported["United States"] = 354391
+reported["Sweden"] = 9771
+reported["Italy"] = 74159
+reported["Spain"] = 50837
+reported["Norway"] = 436
+reported["United Kingdom"] = 73512
+reported["Denmark"] = 1298
+reported["Iceland"] = 29
 
 av1519 = "average_deaths_2015_2019_all_ages"
 d15 = "deaths_2015_all_ages"
@@ -84,17 +99,20 @@ plt.plot(w, y20, color='k', label="2020")
 
 plt.plot(w, y1519, color="red", label="2015-2019")
 
+xt = ax.get_xticks()
+ax.set_xticks(np.arange(1, 53))
+
 plt.legend()
 plt.grid()
 plt.xlabel("Week")
 plt.ylabel("Excess Mortality")
-plt.title("{} : min={} : av={} : max={}".format(country, int(sum_min), int(sum_av), int(sum_max)))
+plt.title("{} : min={} : av={} : max={} : reported={}".format(country, int(sum_min), int(sum_av), int(sum_max), reported[country]))
 
 print("Excess death min     : {:d}".format(int(sum_min)))
 print("Excess death max     : {:d}".format(int(sum_max)))
 print("Excess death average : {:d}".format(int(sum_av)))
 
-plt.savefig("figure.png")
+plt.savefig("{}_fig.png".format(country))
 
 plt.show()
 
