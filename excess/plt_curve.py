@@ -9,7 +9,7 @@ import numpy as np
 from scipy.optimize import minimize
 
 #country="Sweden"
-country="United States"
+#country="United States"
 #country="Italy"
 #country="Spain"
 #country="Portugal"
@@ -19,6 +19,8 @@ country="United States"
 #country="United Kingdom"
 #country="Denmark"
 #country="Iceland"
+#country="Germany"
+country="France"
 
 reported = {}
 reported["Belgium"] = 19441
@@ -30,6 +32,8 @@ reported["Norway"] = 436
 reported["United Kingdom"] = 73512
 reported["Denmark"] = 1298
 reported["Iceland"] = 29
+reported["Germany"] = 34194
+reported["France"] = 64780
 
 av1519 = "average_deaths_2015_2019_all_ages"
 d15 = "deaths_2015_all_ages"
@@ -69,9 +73,11 @@ for i,c in enumerate(countries):
         a19 = df[d19][i]
         a20 = df[d20][i]        
         xa = a20 - a1519
+        if math.isnan(a15):
+            a15 = a19
         xmin = a20 - min(a15, a16, a17, a18, a19)
         xmax = a20 - max(a15, a16, a17, a18, a19)
-        
+        print("{} : xmin = {} {} {} {} {} {}".format(i,xmin,a15,a16,a17,a18,a19))
         if not math.isnan(xa):
             sum_av += xa
         if not math.isnan(xmin):
@@ -80,7 +86,8 @@ for i,c in enumerate(countries):
             sum_max += xmax
             
         y1519.append(a1519)
-        y15.append(a15)
+        if not math.isnan(15):
+            y15.append(a15)
         y16.append(a16)
         y17.append(a17)
         y18.append(a18)
@@ -93,8 +100,8 @@ fig, ax = plt.subplots(figsize=(15,6))
 plt.plot(w, y15, color='grey', linewidth=0.5, label="2015")
 plt.plot(w, y16, color='grey', linewidth=0.5, label="2016")
 plt.plot(w, y17, color='grey', linewidth=0.5, label="2017")
-plt.plot(w, y18, color='grey', linewidth=0.5, label="2018")
-plt.plot(w, y19, color='grey', linewidth=0.5, label="2019")
+plt.plot(w, y18, color='green', linewidth=0.5, label="2018")
+plt.plot(w, y19, color='blue', linewidth=0.5, label="2019")
 plt.plot(w, y20, color='k', label="2020")
 
 plt.plot(w, y1519, color="red", label="2015-2019")
