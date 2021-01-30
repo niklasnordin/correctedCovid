@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import minimize
 
-#country="Sweden"
+country="Sweden"
 #country="United States"
 #country="Italy"
 #country="Spain"
@@ -20,7 +20,7 @@ from scipy.optimize import minimize
 #country="Denmark"
 #country="Iceland"
 #country="Germany"
-country="France"
+#country="France"
 
 reported = {}
 reported["Belgium"] = 19441
@@ -59,6 +59,7 @@ y16 = []
 y15 = []
 
 w = []
+w15 = []
 sum_min = 0.0
 sum_max = 0.0
 sum_av = 0.0
@@ -88,6 +89,8 @@ for i,c in enumerate(countries):
         y1519.append(a1519)
         if not math.isnan(a15):
             y15.append(a15)
+            w15.append(weeks[i])
+            
         y16.append(a16)
         y17.append(a17)
         y18.append(a18)
@@ -97,7 +100,7 @@ for i,c in enumerate(countries):
         
 fig, ax = plt.subplots(figsize=(15,6))
 
-plt.plot(w, y15, color='grey', linewidth=0.5, label="2015")
+plt.plot(w15, y15, color='grey', linewidth=0.5, label="2015")
 plt.plot(w, y16, color='grey', linewidth=0.5, label="2016")
 plt.plot(w, y17, color='grey', linewidth=0.5, label="2017")
 plt.plot(w, y18, color='green', linewidth=0.5, label="2018")
