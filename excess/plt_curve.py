@@ -19,7 +19,7 @@ country="Sweden"
 #country="United Kingdom"
 #country="Denmark"
 #country="Iceland"
-#country="Germany"
+country="Germany"
 #country="France"
 
 reported = {}
@@ -78,7 +78,7 @@ for i,c in enumerate(countries):
             a15 = a19
         xmin = a20 - min(a15, a16, a17, a18, a19)
         xmax = a20 - max(a15, a16, a17, a18, a19)
-        print("{} : xmin = {} {} {} {} {} {}".format(i,xmin,a15,a16,a17,a18,a19))
+#        print("{} : xmin = {} {} {} {} {} {}".format(i,xmin,a15,a16,a17,a18,a19))
         if not math.isnan(xa):
             sum_av += xa
         if not math.isnan(xmin):
