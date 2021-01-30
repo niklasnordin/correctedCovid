@@ -86,7 +86,7 @@ for i,c in enumerate(countries):
             sum_max += xmax
             
         y1519.append(a1519)
-        if not math.isnan(15):
+        if not math.isnan(a15):
             y15.append(a15)
         y16.append(a16)
         y17.append(a17)
@@ -112,7 +112,7 @@ ax.set_xticks(np.arange(1, 53))
 plt.legend()
 plt.grid()
 plt.xlabel("Week")
-plt.ylabel("Excess Mortality")
+plt.ylabel("Mortality")
 plt.title("{} : min={} : av={} : max={} : reported={}".format(country, int(sum_min), int(sum_av), int(sum_max), reported[country]))
 
 print("Excess death min     : {:d}".format(int(sum_min)))
