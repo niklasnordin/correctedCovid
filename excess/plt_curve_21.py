@@ -8,8 +8,8 @@ import pandas as pd
 import numpy as np
 from scipy.optimize import minimize
 
-#country="Sweden"
-country="United States"
+country="Sweden"
+#country="United States"
 #country="Italy"
 #country="Spain"
 #country="Portugal"
@@ -43,6 +43,7 @@ d17 = "deaths_2017_all_ages"
 d18 = "deaths_2018_all_ages"
 d19 = "deaths_2019_all_ages"
 d20 = "deaths_2020_all_ages"
+d21 = "deaths_2021_all_ages"
 
 
 filename="Excess Mortality Data – HMD (2021).csv"
@@ -58,6 +59,7 @@ y18 = []
 y17 = []
 y16 = []
 y15 = []
+y21 = []
 
 w = []
 w15 = []
@@ -73,7 +75,8 @@ for i,c in enumerate(countries):
         a17 = df[d17][i]
         a18 = df[d18][i]
         a19 = df[d19][i]
-        a20 = df[d20][i]        
+        a20 = df[d20][i]
+        a21 = df[d21][i]
         xa = a20 - a1519
         if math.isnan(a15):
             a15 = a19
@@ -96,7 +99,9 @@ for i,c in enumerate(countries):
         y17.append(a17)
         y18.append(a18)
         y19.append(a19)
-        y20.append(a20)        
+        y20.append(a20)
+        y21.append(a21)
+        
         w.append(weeks[i])
         
 fig, ax = plt.subplots(figsize=(15,6))
@@ -106,7 +111,8 @@ plt.plot(w, y16, color='grey', linewidth=0.5, label="2016")
 plt.plot(w, y17, color='grey', linewidth=0.5, label="2017")
 plt.plot(w, y18, color='green', linewidth=0.5, label="2018")
 plt.plot(w, y19, color='blue', linewidth=0.5, label="2019")
-plt.plot(w, y20, color='k', label="2020")
+plt.plot(w, y20, color='k', linewidth=0.5, label="2020")
+plt.plot(w, y21, color='k', linewidth=1, label="2021")
 
 plt.plot(w, y1519, color="red", label="2015-2019")
 
